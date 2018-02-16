@@ -16,6 +16,8 @@ spec:
         image: ccpgames/kubernetes-fluentd-s3:latest
         imagePullPolicy: Always
         env:
+        - name: FLUENTD_OPT
+          value: -qq
         - name: S3_LOGS_BUCKET_NAME
           valueFrom:
             configMapKeyRef:
@@ -31,11 +33,6 @@ spec:
             configMapKeyRef:
               name: kubernetes-fluentd-s3-config
               key: S3_LOGS_BUCKET_REGION
-          # --use-v1-config allows using env vars in config file
-          # -qq sets fluentd log level to ERROR
-        args:
-        - --use-v1-config
-        - -qq
         securityContext:
           privileged: true
         resources:
