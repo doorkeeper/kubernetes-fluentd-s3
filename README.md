@@ -31,21 +31,13 @@ docker pull ccpgames/kubernetes-fluentd-s3
     "Statement": [
         {
             "Effect": "Allow",
-            "Action": [
-                "s3:*"
-            ],
-            "Resource": [
-                "arn:aws:s3:::log-bucket/logs/*"
-            ]
+            "Action": [ "s3:ListBucket" ],
+            "Resource": [ "arn:aws:s3:::log-bucket" ]
         },
         {
             "Effect": "Allow",
-            "Action": [
-                "s3:*"
-            ],
-            "Resource": [
-                "arn:aws:s3:::log-bucket/logs"
-            ]
+            "Action": [ "s3:PutObject", "s3:GetObject" ],
+            "Resource": [ "arn:aws:s3:::log-bucket/logs/*" ]
         }
     ]
 }
